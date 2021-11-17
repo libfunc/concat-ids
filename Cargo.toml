@@ -10,7 +10,7 @@ homepage = "https://github.com/libfunc/concat-ids/"
 documentation = "https://docs.rs/concat-ids/"
 repository = "https://github.com/libfunc/concat-ids/"
 readme = "README.md"
-edition = "2018"
+edition = "2021"
 
 [lib]
 name = "concat_ids"

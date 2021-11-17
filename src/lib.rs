@@ -2,6 +2,8 @@
 
 pub mod concat {
     use seq_macro::seq;
+
+    #[inline]
     pub const fn c14(status: u8, first: u32) -> [u8; 5] {
         let first = first.to_be_bytes();
         seq!(N in 0..=3 {
@@ -12,6 +14,7 @@ pub mod concat {
     })
     }
 
+    #[inline]
     pub const fn c41(first: u32, status: u8) -> [u8; 5] {
         let first = first.to_be_bytes();
         seq!(N in 0..=3 {
@@ -22,6 +25,7 @@ pub mod concat {
     })
     }
 
+    #[inline]
     pub const fn c44(first: u32, second: u32) -> [u8; 8] {
         let first = first.to_be_bytes();
         let second = second.to_be_bytes();
@@ -33,6 +37,7 @@ pub mod concat {
     })
     }
 
+    #[inline]
     pub const fn c414(first: u32, status: u8, second: u32) -> [u8; 9] {
         let first = first.to_be_bytes();
         let second = second.to_be_bytes();
@@ -45,6 +50,7 @@ pub mod concat {
     })
     }
 
+    #[inline]
     pub const fn c441(first: u32, second: u32, status: u8) -> [u8; 9] {
         let first = first.to_be_bytes();
         let second = second.to_be_bytes();
@@ -57,6 +63,7 @@ pub mod concat {
     })
     }
 
+    #[inline]
     pub const fn c444(first: u32, second: u32, a3: u32) -> [u8; 12] {
         let first = first.to_be_bytes();
         let second = second.to_be_bytes();
@@ -70,6 +77,7 @@ pub mod concat {
     })
     }
 
+    #[inline]
     pub const fn c4414(first: u32, second: u32, status: u8, a3: u32) -> [u8; 13] {
         let first = first.to_be_bytes();
         let second = second.to_be_bytes();
@@ -84,6 +92,7 @@ pub mod concat {
     })
     }
 
+    #[inline]
     pub const fn c4441(first: u32, second: u32, a3: u32, status: u8) -> [u8; 13] {
         let first = first.to_be_bytes();
         let second = second.to_be_bytes();
@@ -98,6 +107,7 @@ pub mod concat {
     })
     }
 
+    #[inline]
     pub const fn c44144(
         first: u32,
         second: u32,
@@ -120,6 +130,7 @@ pub mod concat {
     })
     }
 
+    #[inline]
     pub const fn c44414(
         first: u32,
         second: u32,
@@ -142,6 +153,7 @@ pub mod concat {
     })
     }
 
+    #[inline]
     pub const fn c444144(
         a1: u32,
         a2: u32,
@@ -170,6 +182,8 @@ pub mod concat {
 
 pub mod from {
     use seq_macro::seq;
+
+    #[inline]
     pub const fn f14(bytes: [u8; 5]) -> (u8, u32) {
         let status = bytes[0];
         seq!(N in 1..5 {
@@ -177,6 +191,8 @@ pub mod from {
     });
         (status, a1)
     }
+
+    #[inline]
     pub const fn f41(bytes: [u8; 5]) -> (u32, u8) {
         seq!(N in 0..4 {
         let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
@@ -184,6 +200,8 @@ pub mod from {
         let status = bytes[4];
         (a1, status)
     }
+
+    #[inline]
     pub const fn f44(bytes: [u8; 8]) -> (u32, u32) {
         seq!(N in 0..4 {
         let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
@@ -193,6 +211,8 @@ pub mod from {
     });
         (a1, a2)
     }
+
+    #[inline]
     pub const fn f414(bytes: [u8; 9]) -> (u32, u8, u32) {
         seq!(N in 0..4 {
         let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
@@ -203,6 +223,8 @@ pub mod from {
     });
         (a1, status, a2)
     }
+
+    #[inline]
     pub const fn f441(bytes: [u8; 9]) -> (u32, u32, u8) {
         seq!(N in 0..4 {
         let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
@@ -213,6 +235,8 @@ pub mod from {
         let status = bytes[8];
         (a1, a2, status)
     }
+
+    #[inline]
     pub const fn f444(bytes: [u8; 12]) -> (u32, u32, u32) {
         seq!(N in 0..4 {
         let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
@@ -225,6 +249,8 @@ pub mod from {
     });
         (a1, a2, a3)
     }
+
+    #[inline]
     pub const fn f4441(bytes: [u8; 13]) -> (u32, u32, u32, u8) {
         seq!(N in 0..4 {
         let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
@@ -238,6 +264,8 @@ pub mod from {
         let status = bytes[12];
         (a1, a2, a3, status)
     }
+
+    #[inline]
     pub const fn f4414(bytes: [u8; 13]) -> (u32, u32, u8, u32) {
         seq!(N in 0..4 {
         let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
@@ -251,6 +279,8 @@ pub mod from {
     });
         (a1, a2, status, a3)
     }
+
+    #[inline]
     pub const fn f44144(bytes: [u8; 17]) -> (u32, u32, u8, u32, u32) {
         seq!(N in 0..4 {
         let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
@@ -267,6 +297,8 @@ pub mod from {
     });
         (a1, a2, status, a3, a4)
     }
+
+    #[inline]
     pub const fn f444144(bytes: [u8; 21]) -> (u32, u32, u32, u8, u32, u32) {
         seq!(N in 0..4 {
         let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
@@ -286,5 +318,4 @@ pub mod from {
     });
         (a1, a2, a3, status, a4, a5)
     }
-
 }
