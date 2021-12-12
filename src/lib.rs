@@ -278,6 +278,23 @@ pub mod from {
     }
 
     #[inline]
+    pub const fn f4444(bytes: [u8; 16]) -> (u32, u32, u32, u32) {
+        seq!(N in 0..4 {
+            let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
+        });
+        seq!(N in 4..8 {
+            let a2 = u32::from_be_bytes([ #(bytes[N],)* ]);
+        });
+        seq!(N in 8..12 {
+            let a3 = u32::from_be_bytes([ #(bytes[N],)* ]);
+        });
+        seq!(N in 12..16 {
+            let a4 = u32::from_be_bytes([ #(bytes[N],)* ]);
+        });
+        (a1, a2, a3, a4)
+    }
+
+    #[inline]
     pub const fn f44144(bytes: [u8; 17]) -> (u32, u32, u8, u32, u32) {
         seq!(N in 0..4 {
             let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
@@ -316,3 +333,6 @@ pub mod from {
         (a1, a2, a3, status, a4, a5)
     }
 }
+
+pub use concat::*;
+pub use from::*;
