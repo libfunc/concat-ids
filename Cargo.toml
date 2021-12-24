@@ -17,4 +17,4 @@ name = "concat_ids"
 path = "src/lib.rs"
 
 [dependencies]
-seq-macro = "0.2"
+seq-macro = "0.3"
