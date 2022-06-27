@@ -38,6 +38,19 @@ pub mod concat {
     }
 
     #[inline]
+    pub const fn c144(status: u8, first: u32, second: u32) -> [u8; 9] {
+        let first = first.to_be_bytes();
+        let second = second.to_be_bytes();
+        seq!(N in 0..=3 {
+            [
+                status,
+                #(first[N],)*
+                #(second[N],)*
+            ]
+        })
+    }
+
+    #[inline]
     pub const fn c414(first: u32, status: u8, second: u32) -> [u8; 9] {
         let first = first.to_be_bytes();
         let second = second.to_be_bytes();
@@ -207,6 +220,18 @@ pub mod from {
             let a2 = u32::from_be_bytes([ #(bytes[N],)* ]);
         });
         (a1, a2)
+    }
+
+    #[inline]
+    pub const fn f144(bytes: [u8; 9]) -> (u8, u32, u32) {
+        let status = bytes[0];
+        seq!(N in 1..5 {
+            let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
+        });
+        seq!(N in 5..9 {
+            let a2 = u32::from_be_bytes([ #(bytes[N],)* ]);
+        });
+        (status, a1, a2)
     }
 
     #[inline]
