@@ -2,7 +2,7 @@
 name = "concat-ids"
 version = "0.1.0"
 authors = ["Rail Khusnutdinov <mail@rail-ka.ru>"]
-#description = ""
+description = "concat numbers to byte array"
 #keywords = []
 #categories = []
 license = "MIT OR Apache-2.0"
