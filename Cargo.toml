@@ -1,7 +1,7 @@
 [package]
 name = "concat-ids"
 version = "0.1.0"
-authors = ["Rail Khusnutdinov <mail@rail-ka.ru>"]
+authors = ["Rail Khusnutdinov <rail@33.run>"]
 description = "concat numbers to byte array"
 #keywords = []
 #categories = []
