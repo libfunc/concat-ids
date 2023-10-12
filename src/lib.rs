@@ -1,4 +1,5 @@
 #![no_std]
+#![forbid(unsafe_code)]
 
 pub mod concat {
     use seq_macro::seq;
@@ -85,6 +86,21 @@ pub mod concat {
             [
                 #(first[N],)*
                 #(second[N],)*
+                #(a3[N],)*
+            ]
+        })
+    }
+
+    #[inline]
+    pub const fn c4144(a1: u32, status: u8, a2: u32, a3: u32) -> [u8; 13] {
+        let a1 = a1.to_be_bytes();
+        let a2 = a2.to_be_bytes();
+        let a3 = a3.to_be_bytes();
+        seq!(N in 0..=3 {
+            [
+                #(a1[N],)*
+                status,
+                #(a2[N],)*
                 #(a3[N],)*
             ]
         })
@@ -285,6 +301,21 @@ pub mod from {
         });
         let status = bytes[12];
         (a1, a2, a3, status)
+    }
+
+    #[inline]
+    pub const fn f4144(bytes: [u8; 13]) -> (u32, u8, u32, u32) {
+        seq!(N in 0..4 {
+            let a1 = u32::from_be_bytes([ #(bytes[N],)* ]);
+        });
+        let status = bytes[4];
+        seq!(N in 5..9 {
+            let a2 = u32::from_be_bytes([ #(bytes[N],)* ]);
+        });
+        seq!(N in 9..13 {
+            let a3 = u32::from_be_bytes([ #(bytes[N],)* ]);
+        });
+        (a1, status, a2, a3)
     }
 
     #[inline]
